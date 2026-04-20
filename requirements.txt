@@ -1,0 +1,9 @@
+# Add your plugin's Python dependencies here.
+# These are installed automatically by JobDocs when the plugin is first loaded.
+#
+# Examples:
+#   pandas>=2.0
+#   openpyxl>=3.1
+#   requests>=2.28
+#
+# Leave empty if you have no extra dependencies.

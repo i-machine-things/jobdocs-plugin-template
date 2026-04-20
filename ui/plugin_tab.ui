@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>PluginTab</class>
+ <widget class="QWidget" name="PluginTab">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>880</width>
+    <height>650</height>
+   </rect>
+  </property>
+  <layout class="QVBoxLayout" name="mainLayout">
+   <property name="spacing">
+    <number>3</number>
+   </property>
+   <property name="leftMargin">
+    <number>3</number>
+   </property>
+   <property name="topMargin">
+    <number>3</number>
+   </property>
+   <property name="rightMargin">
+    <number>3</number>
+   </property>
+   <property name="bottomMargin">
+    <number>3</number>
+   </property>
+
+   <!--
+     FOLDER CONFIG BAR
+     ─────────────────
+     External plugins can't modify the JobDocs Settings dialog, so expose
+     any folder configuration directly here. The Browse button saves the
+     chosen path to JobDocs settings via app_context.set_setting().
+
+     Wire up in module.py:
+       self.dir_edit = widget.dir_edit
+       widget.browse_dir_btn.clicked.connect(self._browse_dir)
+   -->
+   <item>
+    <widget class="QGroupBox" name="dirConfigGroup">
+     <property name="title">
+      <string>Working Folder</string>
+     </property>
+     <layout class="QHBoxLayout" name="dirConfigLayout">
+      <property name="spacing">
+       <number>5</number>
+      </property>
+      <property name="leftMargin">
+       <number>8</number>
+      </property>
+      <property name="topMargin">
+       <number>5</number>
+      </property>
+      <property name="rightMargin">
+       <number>8</number>
+      </property>
+      <property name="bottomMargin">
+       <number>5</number>
+      </property>
+      <item>
+       <widget class="QLineEdit" name="dir_edit">
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+        <property name="placeholderText">
+         <string>No folder configured — click Browse to set the working directory...</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="browse_dir_btn">
+        <property name="text">
+         <string>Browse...</string>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>80</width>
+          <height>16777215</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+
+   <!--
+     MAIN CONTENT AREA
+     ──────────────────
+     Replace the placeholder below with your plugin's actual UI.
+     Common patterns:
+       - QTabWidget  →  multiple sub-tabs (see quote_tab.ui / training_tab.ui)
+       - QSplitter   →  side-by-side panels (tree + detail)
+       - QGroupBox   →  form + file list + action buttons
+
+     See jobdocs-training-docs for a full two-tab example.
+   -->
+   <item>
+    <widget class="QGroupBox" name="contentGroup">
+     <property name="title">
+      <string>Content — replace this with your plugin UI</string>
+     </property>
+     <layout class="QVBoxLayout" name="contentLayout">
+      <property name="spacing">
+       <number>8</number>
+      </property>
+      <property name="leftMargin">
+       <number>8</number>
+      </property>
+      <property name="topMargin">
+       <number>8</number>
+      </property>
+      <property name="rightMargin">
+       <number>8</number>
+      </property>
+      <property name="bottomMargin">
+       <number>8</number>
+      </property>
+      <item>
+       <widget class="QLabel" name="placeholderLabel">
+        <property name="text">
+         <string>Replace this group box with your plugin's UI widgets.</string>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: #888; font-style: italic; padding: 20px;</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+
+   <!--
+     ACTION BAR
+     ──────────
+     Standard bottom row: primary action + secondary buttons + status.
+   -->
+   <item>
+    <layout class="QHBoxLayout" name="actionLayout">
+     <item>
+      <widget class="QPushButton" name="primary_action_btn">
+       <property name="text">
+        <string>Run</string>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">font-weight: bold; padding: 6px 16px;</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="open_folder_btn">
+       <property name="text">
+        <string>Open Folder</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="actionSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+
+   <!-- STATUS LABEL — set from module.py via self.status_label.setText(...) -->
+   <item>
+    <widget class="QLabel" name="status_label">
+     <property name="text">
+      <string/>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: #666;</string>
+     </property>
+    </widget>
+   </item>
+
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
