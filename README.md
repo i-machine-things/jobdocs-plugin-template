@@ -109,8 +109,8 @@ them automatically — no restart required after the first load.
 
 ## Real examples
 
-- [`jobdocs-report-fixer`](../jobdocs-report-fixer) — Excel report transformer
-- [`jobdocs-training-docs`](../jobdocs-training-docs) — Training guide tracker
+- [`jobdocs-report-fixer`](https://github.com/i-machine-things/jobdocs-report-fixer) — Excel report transformer
+- [`jobdocs-training-docs`](https://github.com/i-machine-things/jobdocs-training-docs) — Training guide tracker
 
 ---
 
