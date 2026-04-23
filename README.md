@@ -13,7 +13,7 @@ Starting point for a new external JobDocs plugin.
 
 ## Structure
 
-```
+```text
 jobdocs-my-feature/
 ├── .claude/
 │   ├── CLAUDE.md                  auto version control rules
@@ -97,7 +97,7 @@ from shared.utils import (
 In JobDocs → Settings, set **Plugins directory** to the folder that *contains*
 your plugin folder (not the plugin folder itself):
 
-```
+```text
 plugins_dir/
 └── jobdocs-my-feature/   ← this is your plugin
     ├── module.py
@@ -111,3 +111,10 @@ them automatically — no restart required after the first load.
 
 - [`jobdocs-report-fixer`](../jobdocs-report-fixer) — Excel report transformer
 - [`jobdocs-training-docs`](../jobdocs-training-docs) — Training guide tracker
+
+---
+
+> **Note:** The pre-commit S&P hook (`.claude/hooks/pre_commit_sp_check.py`) is triggered
+> via Claude Code's `PreToolUse` hook, not by a standard `git commit` hook. It runs when
+> Claude Code executes a `git commit` bash command. Plain `git commit` from a terminal
+> bypasses it by design — the check is Claude-only.

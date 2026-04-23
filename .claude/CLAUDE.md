@@ -65,7 +65,42 @@ Rules:
 - If a new feature is added or changed, update the top-level README.md before committing.
 - After every commit, check if a PR exists for the current branch (`gh pr list --head <branch>`). If none exists, open one immediately via `gh pr create`. Never leave a commit on a feature branch without an open PR.
 
-## Rule 3: This Is an External Plugin — Not Part of JobDocs Core
+## Rule 3: Fork From the Template — Backport Template Changes
+
+### New plugins must be forked from this repository
+
+Every new JobDocs external plugin starts as a fork of `jobdocs-plugin-template`.
+Do **not** create a plugin repo from scratch.
+
+- Fork `jobdocs-plugin-template` on GitHub, then rename the fork to your plugin name.
+- Rename the class in `module.py` and update `get_name()`, `get_order()`, and the settings key.
+- All `.claude/` files come pre-configured — do not strip or replace them.
+
+### Template file changes must be PR'd back upstream
+
+The following files are **template files** — shared infrastructure owned by `jobdocs-plugin-template`:
+
+```
+.claude/CLAUDE.md
+.claude/S&P.md               (format/structure only — not plugin-specific content)
+.claude/settings.json
+.claude/hooks/pre_commit_sp_check.py
+module.py                    (scaffold structure, not plugin-specific logic)
+ui/plugin_tab.ui             (folder config bar pattern, base layout)
+requirements.txt             (format/comments only)
+README.md
+```
+
+If you improve or fix any of these in a plugin repo, open a PR to `jobdocs-plugin-template`
+with the change **before** (or alongside) merging it in the plugin repo. This keeps the
+template current so future forks benefit from the fix.
+
+Plugin-specific code (your own methods, UI widgets, settings keys, S&P entries) is **not**
+backported — only changes that would benefit every plugin.
+
+---
+
+## Rule 4 (was Rule 3): This Is an External Plugin — Not Part of JobDocs Core
 
 This repository is a standalone external plugin. It is loaded at runtime from the
 JobDocs `plugins_dir` setting and must never be merged into the main JobDocs repo.
@@ -77,7 +112,7 @@ JobDocs `plugins_dir` setting and must never be merged into the main JobDocs rep
 
 ---
 
-## Rule 4: Semantic Versioning
+## Rule 5: Semantic Versioning
 
 Update GitHub releases on minor version changes to the production branch.
 
@@ -99,7 +134,12 @@ git push origin v1.2.3
 After every merge to `master`, count commits since the last `v*` tag:
 
 ```bash
-git log $(git describe --tags --abbrev=0)..master --oneline
+last_tag=$(git describe --tags --abbrev=0 2>/dev/null)
+if [ -n "$last_tag" ]; then
+  git log "$last_tag"..master --oneline
+else
+  git log master --oneline
+fi
 ```
 
 Count by type:
@@ -114,7 +154,7 @@ If both thresholds are met simultaneously, bump MINOR (takes precedence).
 
 Check this threshold after every merge to master. Do not wait for the user to ask.
 
-## Rule 5: Pull Request Reviews
+## Rule 6: Pull Request Reviews
 
 When a pull request is open or being prepared:
 
