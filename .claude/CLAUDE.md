@@ -82,7 +82,6 @@ The following files are **template files** — shared infrastructure owned by `j
 
 ```
 .claude/CLAUDE.md
-.claude/S&P.md               (format/structure only — not plugin-specific content)
 .claude/settings.json
 .claude/hooks/pre_commit_sp_check.py
 module.py                    (scaffold structure, not plugin-specific logic)
@@ -95,8 +94,8 @@ If you improve or fix any of these in a plugin repo, open a PR to `jobdocs-plugi
 with the change **before** (or alongside) merging it in the plugin repo. This keeps the
 template current so future forks benefit from the fix.
 
-Plugin-specific code (your own methods, UI widgets, settings keys, S&P entries) is **not**
-backported — only changes that would benefit every plugin.
+Plugin-specific code (your own methods, UI widgets, settings keys, `.claude/CODING_NOTES.md`
+entries) is **not** backported — only changes that would benefit every plugin.
 
 ---
 
