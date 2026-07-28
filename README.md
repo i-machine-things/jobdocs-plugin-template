@@ -17,10 +17,10 @@ Starting point for a new external JobDocs plugin.
 jobdocs-my-feature/
 ├── .claude/
 │   ├── CLAUDE.md                  auto version control rules
-│   ├── S&P.md                     CodeRabbit review log (start empty)
+│   ├── CODING_NOTES.md            coding standards & review-finding log (start with just the style rule)
 │   ├── settings.json              Claude Code hook config
 │   └── hooks/
-│       └── pre_commit_sp_check.py pre-commit S&P pattern checker
+│       └── pre_commit_sp_check.py pre-commit coding-notes pattern checker
 ├── ui/
 │   └── plugin_tab.ui              Qt Designer UI file
 ├── __init__.py
@@ -114,7 +114,7 @@ them automatically — no restart required after the first load.
 
 ---
 
-> **Note:** The pre-commit S&P hook (`.claude/hooks/pre_commit_sp_check.py`) is triggered
+> **Note:** The pre-commit coding-notes hook (`.claude/hooks/pre_commit_sp_check.py`) is triggered
 > via Claude Code's `PreToolUse` hook, not by a standard `git commit` hook. It runs when
 > Claude Code executes a `git commit` bash command. Plain `git commit` from a terminal
 > bypasses it by design — the check is Claude-only.

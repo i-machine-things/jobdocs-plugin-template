@@ -6,16 +6,16 @@ You are a senior software developer. These rules override your default behavior.
 
 Before taking any action on this project — including edits, commits, or file creation:
 
-1. Read `.claude/CLAUDE.md` and `.claude/S&P.md`.
+1. Read `.claude/CLAUDE.md` and `.claude/CODING_NOTES.md`.
 2. Run `gh pr list` — if a PR exists for the current branch, run `gh pr view <number> --comments` and read **all comments** (CodeRabbit and human) before proceeding.
 3. Run `gh issue list` — check for open issues relevant to the current work.
 4. Do not make any edits until all outstanding findings and review comments are addressed or acknowledged.
 
 No exceptions.
 
-### S&P.md is for programming notes only
+### Checking PR review status
 
-`.claude/S&P.md` is a standards and practices log — a reference for coding patterns, past findings, and decisions. It is **not** the source of truth for PR review status.
+`.claude/CODING_NOTES.md` is a standards and practices reference — a log of coding patterns and past findings, grouped by topic. It is **not** the source of truth for PR review status.
 
 - To check if a PR review is complete or paused: **always use `gh pr view <number> --comments`**.
 - CodeRabbit may auto-pause reviews after rapid commits — check for `review paused` in the summary comment.
@@ -82,7 +82,6 @@ The following files are **template files** — shared infrastructure owned by `j
 
 ```
 .claude/CLAUDE.md
-.claude/S&P.md               (format/structure only — not plugin-specific content)
 .claude/settings.json
 .claude/hooks/pre_commit_sp_check.py
 module.py                    (scaffold structure, not plugin-specific logic)
@@ -95,8 +94,8 @@ If you improve or fix any of these in a plugin repo, open a PR to `jobdocs-plugi
 with the change **before** (or alongside) merging it in the plugin repo. This keeps the
 template current so future forks benefit from the fix.
 
-Plugin-specific code (your own methods, UI widgets, settings keys, S&P entries) is **not**
-backported — only changes that would benefit every plugin.
+Plugin-specific code (your own methods, UI widgets, settings keys, `.claude/CODING_NOTES.md`
+entries) is **not** backported — only changes that would benefit every plugin.
 
 ---
 
@@ -161,22 +160,7 @@ When a pull request is open or being prepared:
 - Always open PRs via `gh pr create` — never merge directly to `master` without a PR.
 - After any review is submitted (CodeRabbit **or human**), read all comments before making any further changes.
 - For each finding, regardless of source:
-  1. If it matches an existing `.claude/S&P.md` entry — fix it immediately and reference the S&P entry in the commit message.
-  2. If it is a new pattern — fix it, then append it to `.claude/S&P.md` in the standard format before committing.
-- Do not dismiss or ignore nitpicks — log them to `.claude/S&P.md` even if not immediately actionable.
-- Only merge a PR after all blocking comments are resolved.
-
-### S&P.md Entry Format
-
-```markdown
-## YYYY-MM-DD — `path/to/file.py` (short description)
-
-**Review:** WHAT CODERABBIT FLAGGED
-**Result:** outcome / resolution
-
-### Findings
-
-1. **Title**
-   - Detail
-   - Fix applied
-```
+  1. If it matches an existing `.claude/CODING_NOTES.md` entry — fix it immediately and reference the note's topic in the commit message.
+  2. If it is a new pattern — fix it, then add or amend a note under the relevant topic in `.claude/CODING_NOTES.md` before committing, following that file's style rule (clear, ≤300 characters, grouped by topic).
+- Do not dismiss or ignore nitpicks — log them to `.claude/CODING_NOTES.md` even if not immediately actionable.
+- Only merge a PR after all blocking comments are resolved and documentation has been updated.
